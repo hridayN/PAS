@@ -1,7 +1,7 @@
 ﻿using PAS.API.Constants;
+using PAS.API.Infrastructure.Entities.Base;
 using PAS.API.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,7 +12,7 @@ namespace PAS.API.Infrastructure.Entities
     /// CodeList Entity class
     /// </summary>
     [Table("code_list", Schema = DbConstant.PolicyAdministrationSystemSchema)]
-    public class CodeListEntity
+    public class CodeListEntity : Entity
     {
         /// <summary>
         /// CodeListId for CodeList
@@ -32,6 +32,12 @@ namespace PAS.API.Infrastructure.Entities
         /// </summary>
         [Column("code_list_reference")]
         public string CodeListReference { get; set; }
+
+        /// <summary>
+        /// Code List Version
+        /// </summary>
+        [Column("code_list_version")]
+        public int CodeListVersion { get; set; }
 
         /// <summary>
         /// CodeList description

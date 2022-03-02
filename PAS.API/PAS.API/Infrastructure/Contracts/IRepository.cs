@@ -50,8 +50,6 @@ namespace PAS.API.Infrastructure.Contracts
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<T> UpdateAsync(T entity);
-
-
+        Task UpdateAsync(T entity);
     }
 }

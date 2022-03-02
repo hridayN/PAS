@@ -77,7 +77,12 @@ namespace PAS.API.Infrastructure.Repositories.Base
         /// <returns></returns>
         public async Task<T> GetOneAsyncWithOrder(Expression<Func<T, bool>> spec, string orderByColumn, bool isOrderBy)
         {
-            throw new NotImplementedException();
+            IQueryable<T> record = _dbContext.Set<T>().Where(spec);
+            if (!string.IsNullOrEmpty(orderByColumn))
+            {
+                record = _expressionFilter.OrderByDynamic<T>(record, orderByColumn, out bool isValid, isOrderBy);
+            }
+            return await record.FirstOrDefaultAsync();
         }
 
         /// <summary>
@@ -85,9 +90,10 @@ namespace PAS.API.Infrastructure.Repositories.Base
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public async Task<T> UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Entry(entity).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
         }
 
         /// <summary>
