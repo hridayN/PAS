@@ -1,1 +1,1 @@
-Complete LoadCodeList and ImportCodeList methods in CodeListService
+Complete ImportCodeList method in CodeListService
