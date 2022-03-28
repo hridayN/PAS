@@ -1,16 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using PAS.API.Infrastructure.Entities;
-using PAS.API.Models;
-using System.Collections.Generic;
+using System.Data.Common;
 
 namespace PAS.API.Infrastructure
 {
     /// <summary>
     /// PASDbContext class
     /// </summary>
-    public class PASDbContext : DbContext
+    public class PASDbContext : BaseDbContext
     {
+        // private DbConnection _connection;
+        private readonly string _dbType;
+        private readonly string _connectionString;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -19,20 +20,49 @@ namespace PAS.API.Infrastructure
         }
 
         /// <summary>
-        /// CodeList table
+        /// Parameterized constructor
         /// </summary>
-        public DbSet<CodeListEntity> CodeList { get; set; }
+        /// <param name="options"></param>
+        /// <param name="httpContextAccessor"></param>
+        /// <param name="configuration"></param>
+        public PASDbContext(DbContextOptions<PASDbContext> options, IHttpContextAccessor httpContextAccessor, IConfiguration configuration) : base(options)
+        {
+            _dbType = configuration.GetValue<string>("Database:Type");
+            _connectionString = configuration.GetValue<string>("Database:ConnectionString");
+        }
 
         /// <summary>
-        /// Model creation
+        /// Parameterized constructor
         /// </summary>
-        /// <param name="modelBuilder"></param>
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        /// <param name="options"></param>
+        /// <param name="httpContextAccessor"></param>
+        /// <param name="connectionString"></param>
+        public PASDbContext(DbContextOptions<PASDbContext> options, IHttpContextAccessor httpContextAccessor, string connectionString) : base(options)
         {
-            modelBuilder.Entity<CodeListEntity>(cl =>
+            _dbType = "SQLServer";
+            _connectionString = connectionString;
+        }
+
+
+        /// <summary>
+        /// OnConfiguring
+        /// </summary>
+        /// <param name="optionsBuilder"></param>
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured && !string.IsNullOrWhiteSpace(_connectionString))
             {
-                cl.Property(p => p.EnumerationCodeList).HasConversion(c => JsonConvert.SerializeObject(c), x => JsonConvert.DeserializeObject<List<EnumerationCode>>(x));
-            });
+                switch (_dbType)
+                {
+                    case "SQLServer":
+                        optionsBuilder.UseSqlServer(_connectionString);
+                        break;
+                    default:
+                        optionsBuilder.UseSqlServer(_connectionString);
+                        break;
+                }
+            }
+            base.OnConfiguring(optionsBuilder);
         }
     }
 }

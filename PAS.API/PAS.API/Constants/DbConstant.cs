@@ -9,5 +9,10 @@
         /// Schema name for PolicyAdministrationSystem
         /// </summary>
         public const string PolicyAdministrationSystemSchema = "policy_administration_system";
+        
+        /// <summary>
+        /// Table Name for Migration History Table
+        /// </summary>
+        public const string MigrationTable = "pas_migrations";
     }
 }
