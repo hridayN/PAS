@@ -163,7 +163,7 @@ namespace PAS.API.Services.Core
                             if (!table.Columns.Contains("Description"))
                             {
                                 isValid = false;
-                                Utility.AddErrorMessage(messageInformation, Errors.ExcelDataMissing, string.Format(Errors.ExcelDataMissing.ErrorDescription, table.TableName, "Description"));
+                                Utility.AddErrorMessage(messageInformation, Errors.ExcelDataMissing, string.Format(Messages.ExcelDataMissing, table.TableName, "Description"));
                             }
                         }
 

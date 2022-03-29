@@ -15,7 +15,7 @@ namespace PAS.API.Utilites
                 error = new MessageStatusError 
                 {
                     ErrorCode = error.ErrorCode,
-                    ErrorDescription = error.ErrorDescription
+                    ErrorDescription = errorMessage
                 };
             }
 

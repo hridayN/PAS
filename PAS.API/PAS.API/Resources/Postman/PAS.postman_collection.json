@@ -1,0 +1,46 @@
+{
+	"info": {
+		"_postman_id": "301a91d8-d0ed-4750-a9af-f7fb396ed627",
+		"name": "PAS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Import Code list",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "importCodeListRequest",
+							"value": "{\"messageInformation\": {     \"businessPurposeTypeCode\": \"string\",     \"sequenceNumber\": 0,     \"trackingNumber\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",     \"sender\": \"string\",     \"receiver\": \"string\",     \"userInfo\": {       \"partyDetails\": [         {           \"partyCode\": \"string\",           \"partyRole\": \"string\"         }       ],       \"userName\": \"string\",       \"userRoles\": [         \"string\"       ],       \"userEmail\": \"string\"     },     \"channelType\": \"empty\"   }}\n",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Nitin/CodeLists/NewCodeList.xlsx"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:34343/importCodeList/v1/codeList",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "34343",
+					"path": [
+						"importCodeList",
+						"v1",
+						"codeList"
+					]
+				},
+				"description": "Import Code List"
+			},
+			"response": []
+		}
+	]
+}

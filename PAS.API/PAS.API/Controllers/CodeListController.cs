@@ -12,7 +12,7 @@ namespace PAS.API.Controllers
     /// Controller for Reference Data Operations
     /// </summary>
     [ApiController]
-    [Route("[controller]")]
+    // [Route("[controller]")]
     public class CodeListController : BaseController
     {
         /// <summary>
@@ -36,7 +36,7 @@ namespace PAS.API.Controllers
         /// <param name="importCodeListRequest"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("importCodeList")]
+        [Route("importCodeList/v1/codeList")]
         public async Task<IActionResult> ImportCodeList(IFormFile file, [FromForm] string importCodeListRequest)
         {
             ImportCodeListResponse importCodeListResponse = new ImportCodeListResponse()
