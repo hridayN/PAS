@@ -7,5 +7,9 @@ namespace PAS.API.DTO
     /// </summary>
     public class ImportCodeListRequest : BaseRequest
     {
+        /// <summary>
+        /// Code-list References
+        /// </summary>
+        public IEnumerable<string> CodeListReferences { get; set; }
     }
 }
